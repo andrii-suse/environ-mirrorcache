@@ -9,8 +9,11 @@ else
     echo export TEST_PG='${__dbi//\/pg\//\/db\//}'
 fi
 
+mmdb=__workdir/../t/data/city.mmdb
+test -f $mmdb || mmdb=/usr/share/environ.d/mc/data/city.mmdb
+
 echo "export MIRRORCACHE_ROOT=__workdir/dt
-export MIRRORCACHE_CITY_MMDB=__workdir/../t/data/city.mmdb
+export MIRRORCACHE_CITY_MMDB=$mmdb
 export MOJO_LISTEN=http://*:__port
 export MIRRORCACHE_AUTH_URL=''
 export MIRRORCACHE_PERMANENT_JOBS=''

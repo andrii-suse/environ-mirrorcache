@@ -3,6 +3,8 @@ SHELL=/bin/bash
 install:
 	install -d -m 0755 "${DESTDIR}"/usr/share/environ.d/mc
 	install -m 0644 port_base.cnf "${DESTDIR}"/usr/share/environ.d/mc/port_base.cnf ;\
+	install -d -m 0755 "${DESTDIR}"/usr/share/environ.d/mc/data
+	install -m 0644 t/data/city.mmdb "${DESTDIR}"/usr/share/environ.d/mc/data/city.mmdb ;\
 	for d in local source; do \
 		test -d $$d || continue ;\
 		mkdir -p "${DESTDIR}"/usr/share/environ.d/mc/$$d ;\
@@ -20,6 +22,6 @@ install:
 		for dd in $$d/* ; do \
 			test -L $$dd || continue ;\
 			l=$$(basename $$dd) ; \
-			ln -fs "${DESTDIR}"/usr/share/environ.d/$$l/local/ "${DESTDIR}"/usr/share/environ.d/mc/$$d/$$l ; \
+			( cd "${DESTDIR}"/usr/share/environ.d/mc/$$d; ln -sf ../../$$l/local/ $$l ) ; \
 		done \
 	done
