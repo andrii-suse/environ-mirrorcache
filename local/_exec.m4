@@ -18,7 +18,7 @@ elif test "${MIRRORCACHE_HYPNOTOAD:-}" == 1 ; then
     perl /usr/share/mirrorcache/script/mirrorcache-hypnotoad >> __workdir/.cout 2>> __workdir/.cerr &
     sleep 3
 else
-    /usr/share/mirrorcache/script/mirrorcache daemon >> __workdir/.cout 2>> __workdir/.cerr &
+    MIRRORCACHE_INTERNAL_SETUP_WEBAPI=1 /usr/share/mirrorcache/script/mirrorcache daemon >> __workdir/.cout 2>> __workdir/.cerr &
     pid=$!
     echo $pid > __workdir/.pid
 fi
